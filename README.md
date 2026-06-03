@@ -82,6 +82,13 @@ rag-day2/
 
 ---
 
+## Techniques Used
+- Hybrid Search (BM25 + Semantic)
+- Cross-encoder Re-ranking
+- Multi-query Retrieval
+- Parent-Child Retrieval
+- Conversational Memory
+
 ## How The System Works
 
 ### 1. Document Upload
