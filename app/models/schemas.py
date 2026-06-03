@@ -34,3 +34,8 @@ class UploadResponse(BaseModel):
 class HealthResponse(BaseModel):
     status: str
     message: str
+
+class QuestionRequest(BaseModel):
+    question: str
+    collection_name: Optional[str] = "default"
+    session_id: Optional[str] = "default"  # ← add this

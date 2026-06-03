@@ -1,6 +1,7 @@
 # app/config.py
 
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 
 class Settings(BaseSettings):
     # App
@@ -21,6 +22,18 @@ class Settings(BaseSettings):
     LLM_MODEL: str = "llama3.2:latest"
     EMBED_MODEL: str = "nomic-embed-text"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
+
+    @field_validator("DEBUG", mode="before")
+    @classmethod
+    def parse_debug(cls, value):
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {"release", "production", "prod"}:
+                return False
+            if normalized in {"debug", "development", "dev"}:
+                return True
+
+        return value
 
     class Config:
         env_file = ".env"
